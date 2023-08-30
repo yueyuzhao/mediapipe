@@ -15,6 +15,7 @@ jobs:
     steps:
       - checkout
       - run: brew install bazelisk cmake ccache
+      - run: pip install -r requirements.txt
       - run: pip install --user future six
       - run: bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
 
