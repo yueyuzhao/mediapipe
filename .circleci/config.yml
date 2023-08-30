@@ -12,12 +12,15 @@ jobs:
     environment:
       GLOG_logtostderr: 1
       HOMEBREW_NO_AUTO_UPDATE: 1
+      OPENCV_SKIP_XCODEBUILD_FORCE_TRYCOMPILE_DEBUG: 1
     steps:
       - checkout
       - run: brew install bazelisk cmake ccache
       - run: pip install -r requirements.txt
       - run: pip install --user future six
-      - run: bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
+      # - run: bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
+      - run: FRAMEWORK_NAME=MediaPipeTasksCommon MPP_BUILD_VERSION=0.1.0 sh mediapipe/tasks/ios/build_ios_framework.sh --sandbox_debug
+      - run: FRAMEWORK_NAME=MediaPipeTasksVision MPP_BUILD_VERSION=0.1.0 sh mediapipe/tasks/ios/build_ios_framework.sh
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
