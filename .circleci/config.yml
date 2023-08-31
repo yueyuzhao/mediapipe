@@ -20,8 +20,12 @@ jobs:
       # - run: bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
       - run: FRAMEWORK_NAME=MediaPipeTasksCommon MPP_BUILD_VERSION=0.1.0 ARCHIVE_FRAMEWORK=false sh mediapipe/tasks/ios/build_ios_framework.sh
       - run: FRAMEWORK_NAME=MediaPipeTasksVision MPP_BUILD_VERSION=0.1.0 ARCHIVE_FRAMEWORK=false sh mediapipe/tasks/ios/build_ios_framework.sh
+      - run:
+          command:
+            mkdir artifacts
+            cp ./bazel-out/darwin-opt/bin/mediapipe/tasks/ios/*.xcframework.zip artifacts
       - store_artifacts:
-          path: ./bazel-out/darwin-opt/bin/mediapipe/tasks/ios/*.xcframework.zip
+          path: ./artifacts
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
