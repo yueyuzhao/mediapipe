@@ -32,22 +32,10 @@ genrule(
     srcs = glob(["opencv-4.5.3/**"]),
     outs = ["opencv2.xcframework.zip"],
     cmd = "&&".join([
-        "$(location opencv-4.5.3/platforms/apple/build_xcframework.py) \
-        --iphonesimulator_archs arm64,x86_64 \
-        --iphoneos_archs arm64 \
-        --without dnn \
-        --without ml \
-        --without stitching \
-        --without photo \
-        --without objdetect \
-        --without gapi \
-        --disable PROTOBUF \
-        --disable-bitcode \
-        --disable-swift \
-        --build_only_specified_archs \
-        --out $(@D)",
+        "mkdir $(@D)",
         "cd $(@D)",
-        "zip --symlinks -r opencv2.xcframework.zip opencv2.xcframework",
+        "wget https://github.com/creatable/opencv/releases/download/4.5.3/opencv2.xcframework.zip",
+        #"zip --symlinks -r opencv2.xcframework.zip opencv2.xcframework",
     ]),
 )
 
