@@ -18,8 +18,10 @@ jobs:
       - run: brew install bazelisk cmake ccache
       - run: pip install -r requirements.txt
       - run: pip install --user future six
+      - run: export OPENCV_SKIP_XCODEBUILD_FORCE_TRYCOMPILE_DEBUG=1
       # - run: bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
-      - run: FRAMEWORK_NAME=MediaPipeTasksCommon MPP_BUILD_VERSION=0.1.0 sh mediapipe/tasks/ios/build_ios_framework.sh --sandbox_debug
+      - run: OPENCV_SKIP_XCODEBUILD_FORCE_TRYCOMPILE_DEBUG=1 FRAMEWORK_NAME=MediaPipeTasksCommon MPP_BUILD_VERSION=0.1.0 sh mediapipe/tasks/ios/build_ios_framework.sh --sandbox_debug
+
       - run: FRAMEWORK_NAME=MediaPipeTasksVision MPP_BUILD_VERSION=0.1.0 sh mediapipe/tasks/ios/build_ios_framework.sh
 
 # Invoke jobs via workflows
