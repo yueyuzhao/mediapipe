@@ -32,7 +32,6 @@ genrule(
     srcs = glob(["opencv-4.5.3/**"]),
     outs = ["opencv2.xcframework.zip"],
     cmd = "&&".join([
-        "mkdir $(@D)",
         "cd $(@D)",
         "wget https://github.com/creatable/opencv/releases/download/4.5.3/opencv2.xcframework.zip",
         #"zip --symlinks -r opencv2.xcframework.zip opencv2.xcframework",
