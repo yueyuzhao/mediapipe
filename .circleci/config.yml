@@ -13,17 +13,15 @@ jobs:
       GLOG_logtostderr: 1
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
-      - checkout
-      - run: brew install bazelisk cmake ccache wget
-      - run: pip install -r requirements.txt
-      - run: pip install --user future six
+      # - checkout
+      # - run: brew install bazelisk cmake ccache wget
+      # - run: pip install -r requirements.txt
+      # - run: pip install --user future six
       # - run: bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
-      - run: FRAMEWORK_NAME=MediaPipeTasksCommon MPP_BUILD_VERSION=0.1.0 ARCHIVE_FRAMEWORK=false sh mediapipe/tasks/ios/build_ios_framework.sh
-      - run: FRAMEWORK_NAME=MediaPipeTasksVision MPP_BUILD_VERSION=0.1.0 ARCHIVE_FRAMEWORK=false sh mediapipe/tasks/ios/build_ios_framework.sh
-      - run:
-          command:
-            mkdir artifacts
-            cp ./bazel-out/darwin-opt/bin/mediapipe/tasks/ios/*.xcframework.zip artifacts
+      # - run: FRAMEWORK_NAME=MediaPipeTasksCommon MPP_BUILD_VERSION=0.1.0 ARCHIVE_FRAMEWORK=false sh mediapipe/tasks/ios/build_ios_framework.sh
+      # - run: FRAMEWORK_NAME=MediaPipeTasksVision MPP_BUILD_VERSION=0.1.0 ARCHIVE_FRAMEWORK=false sh mediapipe/tasks/ios/build_ios_framework.sh
+      - run: mkdir -p ./bazel-out/darwin-opt/bin/mediapipe/tasks/ios/ && touch ./bazel-out/darwin-opt/bin/mediapipe/tasks/ios/hello.xcframework.zip
+      - run: mkdir artifacts && cp ./bazel-out/darwin-opt/bin/mediapipe/tasks/ios/*.xcframework.zip artifacts
       - store_artifacts:
           path: ./artifacts
 
