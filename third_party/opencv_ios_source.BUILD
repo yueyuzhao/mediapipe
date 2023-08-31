@@ -41,7 +41,6 @@ genrule(
         --without photo \
         --without objdetect \
         --without gapi \
-        --without flann \
         --disable PROTOBUF \
         --disable-bitcode \
         --disable-swift \
