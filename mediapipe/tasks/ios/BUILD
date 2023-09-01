@@ -191,12 +191,22 @@ apple_static_xcframework(
         ":MPPObjectDetector.h",
         ":MPPObjectDetectorOptions.h",
         ":MPPObjectDetectorResult.h",
+        ":MPPGestureRecognizer.h",
+        ":MPPGestureRecognizerOptions.h",
+        ":MPPGestureRecognizerResult.h",
+        ":MPPHandLandmark.h",
+        ":MPPHandLandmarker.h",
+        ":MPPHandLandmarkerOptions.h",
+        ":MPPHandLandmarkerResult.h",
+        ":MPPHandLandmarksConnections.h",
     ],
     deps = [
         "//mediapipe/tasks/ios/vision/face_detector:MPPFaceDetector",
         "//mediapipe/tasks/ios/vision/face_landmarker:MPPFaceLandmarker",
         "//mediapipe/tasks/ios/vision/image_classifier:MPPImageClassifier",
         "//mediapipe/tasks/ios/vision/object_detector:MPPObjectDetector",
+        "//mediapipe/tasks/ios/vision/gesture_recognizer:MPPGestureRecognizer",
+        "//mediapipe/tasks/ios/vision/hand_landmarker:MPPHandLandmarker",
     ],
 )
 
