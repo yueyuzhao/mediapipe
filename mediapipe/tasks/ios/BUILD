@@ -58,6 +58,7 @@ CALCULATORS_AND_GRAPHS = [
     "//mediapipe/tasks/cc/vision/hand_landmarker:hand_landmarker_graph",
     "//mediapipe/tasks/cc/vision/image_classifier:image_classifier_graph",
     "//mediapipe/tasks/cc/vision/object_detector:object_detector_graph",
+    "//mediapipe/tasks/cc/vision/pose_landmarker:pose_landmarker_graph",
 ]
 
 strip_api_include_path_prefix(
@@ -103,6 +104,9 @@ strip_api_include_path_prefix(
         "//mediapipe/tasks/ios/vision/object_detector:sources/MPPObjectDetector.h",
         "//mediapipe/tasks/ios/vision/object_detector:sources/MPPObjectDetectorOptions.h",
         "//mediapipe/tasks/ios/vision/object_detector:sources/MPPObjectDetectorResult.h",
+        "//mediapipe/tasks/ios/vision/pose_landmarker:sources/MPPPoseLandmarker.h",
+        "//mediapipe/tasks/ios/vision/pose_landmarker:sources/MPPPoseLandmarkerOptions.h",
+        "//mediapipe/tasks/ios/vision/pose_landmarker:sources/MPPPoseLandmarkerResult.h",
     ],
 )
 
@@ -174,7 +178,6 @@ apple_static_xcframework(
         ":MPPClassificationResult.h",
         ":MPPDetection.h",
         ":MPPLandmark.h",
-        ":MPPClassifierOptions.h",
         ":MPPConnection.h",
         ":MPPCommon.h",
         ":MPPTaskOptions.h",
@@ -193,6 +196,7 @@ apple_static_xcframework(
         ":MPPObjectDetector.h",
         ":MPPObjectDetectorOptions.h",
         ":MPPObjectDetectorResult.h",
+        ":MPPClassifierOptions.h",
         ":MPPGestureRecognizer.h",
         ":MPPGestureRecognizerOptions.h",
         ":MPPGestureRecognizerResult.h",
@@ -209,6 +213,7 @@ apple_static_xcframework(
         "//mediapipe/tasks/ios/vision/object_detector:MPPObjectDetector",
         "//mediapipe/tasks/ios/vision/gesture_recognizer:MPPGestureRecognizer",
         "//mediapipe/tasks/ios/vision/hand_landmarker:MPPHandLandmarker",
+        "//mediapipe/tasks/ios/vision/pose_landmarker:MPPPoseLandmarker",
     ],
 )
 
