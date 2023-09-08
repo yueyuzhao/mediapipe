@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//mediapipe/tasks:internal"])
 
 licenses(["notice"])
 
@@ -21,7 +21,6 @@ objc_library(
     srcs = ["sources/MPPPoseLandmarkerResult.m"],
     hdrs = ["sources/MPPPoseLandmarkerResult.h"],
     deps = [
-        "//mediapipe/tasks/ios/vision/core:MPPMask",
         "//mediapipe/tasks/ios/components/containers:MPPLandmark",
         "//mediapipe/tasks/ios/core:MPPTaskResult",
     ],
@@ -73,13 +72,8 @@ objc_library(
     ],
 )
 
-filegroup(
-    name = "PoseLandmarkerHeaders",
-    srcs = [
-        "sources/MPPPoseLandmarker.h",
-        "sources/MPPPoseLandmarkerResult.h",
-        "sources/MPPPoseLandmarkerOptions.h",
-        "sources/MPPPoseLandmarksConnections.h",
-    ],
-    visibility = ["//visibility:public"],
+objc_library(
+    name = "MPPPoseLandmark",
+    hdrs = ["sources/MPPPoseLandmark.h"],
+    module_name = "MPPPoseLandmark",
 )

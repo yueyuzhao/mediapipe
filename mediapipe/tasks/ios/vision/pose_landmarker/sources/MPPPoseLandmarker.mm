@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #import "mediapipe/tasks/ios/vision/pose_landmarker/sources/MPPPoseLandmarker.h"
+
 #import "mediapipe/tasks/ios/common/utils/sources/MPPCommonUtils.h"
 #import "mediapipe/tasks/ios/common/utils/sources/NSString+Helpers.h"
 #import "mediapipe/tasks/ios/core/sources/MPPTaskInfo.h"
@@ -21,7 +22,6 @@
 #import "mediapipe/tasks/ios/vision/pose_landmarker/sources/MPPPoseLandmarksConnections.h"
 #import "mediapipe/tasks/ios/vision/pose_landmarker/utils/sources/MPPPoseLandmarkerOptions+Helpers.h"
 #import "mediapipe/tasks/ios/vision/pose_landmarker/utils/sources/MPPPoseLandmarkerResult+Helpers.h"
-#import "mediapipe/framework/calculator_registry.h"
 
 namespace {
 using ::mediapipe::NormalizedRect;
@@ -33,9 +33,9 @@ using ::mediapipe::tasks::core::PacketsCallback;
 
 static NSString *const kImageTag = @"IMAGE";
 static NSString *const kImageInStreamName = @"image_in";
-static NSString *const kImageOutStreamName = @"image_out";
 static NSString *const kNormRectTag = @"NORM_RECT";
 static NSString *const kNormRectInStreamName = @"norm_rect_in";
+static NSString *const kImageOutStreamName = @"image_out";
 static NSString *const kSegmentationMaskTag = @"SEGMENTATION_MASK";
 static NSString *const kSegmentationMaskStreamName = @"segmentation_mask";
 static NSString *const kNormLandmarksTag = @"NORM_LANDMARKS";
@@ -57,7 +57,6 @@ static NSString *const kTaskName = @"poseLandmarker";
   /** iOS Vision Task Runner */
   MPPVisionTaskRunner *_visionTaskRunner;
   dispatch_queue_t _callbackQueue;
-    BOOL _outputSegmentationMasks;
 }
 @property(nonatomic, weak) id<MPPPoseLandmarkerLiveStreamDelegate> poseLandmarkerLiveStreamDelegate;
 @end
@@ -67,8 +66,9 @@ static NSString *const kTaskName = @"poseLandmarker";
 
 - (nullable MPPPoseLandmarkerResult *)poseLandmarkerResultWithOutputPacketMap:
     (PacketMap &)outputPacketMap {
-  return [MPPPoseLandmarkerResult poseLandmarkerResultWithLandmarksPacket:outputPacketMap[kNormLandmarksStreamName.cppString] worldLandmarksPacket:outputPacketMap[kPoseWorldLandmarksStreamName
-      .cppString] segmentationMasksPacket: outputPacketMap[kSegmentationMaskStreamName.cppString] shouldCopyMaskPacketData:YES];
+  return [MPPPoseLandmarkerResult 
+      poseLandmarkerResultWithLandmarksPacket:outputPacketMap[kNormLandmarksStreamName.cppString]
+                         worldLandmarksPacket:outputPacketMap[kPoseWorldLandmarksStreamName.cppString]];
 }
 
 - (void)processLiveStreamResult:(absl::StatusOr<PacketMap>)liveStreamResult {
@@ -110,23 +110,17 @@ static NSString *const kTaskName = @"poseLandmarker";
 - (instancetype)initWithOptions:(MPPPoseLandmarkerOptions *)options error:(NSError **)error {
   self = [super init];
   if (self) {
-      _outputSegmentationMasks = options.outputSegmentationMasks;
-      NSMutableArray *outputStreams = [NSMutableArray arrayWithArray:@[
-        [NSString stringWithFormat:@"%@:%@", kNormLandmarksTag, kNormLandmarksStreamName],
-        [NSString
-            stringWithFormat:@"%@:%@", kWorldLandmarksTag, kPoseWorldLandmarksStreamName],
-        [NSString stringWithFormat:@"%@:%@", kImageTag, kImageOutStreamName]
-      ]];
-      if (options.outputSegmentationMasks) {
-          [outputStreams addObject:[NSString stringWithFormat:@"%@:%@", kSegmentationMaskTag, kSegmentationMaskStreamName]];
-      }
     MPPTaskInfo *taskInfo = [[MPPTaskInfo alloc]
         initWithTaskGraphName:kTaskGraphName
                  inputStreams:@[
                    [NSString stringWithFormat:@"%@:%@", kImageTag, kImageInStreamName],
                    [NSString stringWithFormat:@"%@:%@", kNormRectTag, kNormRectInStreamName]
                  ]
-                outputStreams:outputStreams
+                outputStreams:@[
+                   [NSString stringWithFormat:@"%@:%@", kNormLandmarksTag, kNormLandmarksStreamName],
+                   [NSString stringWithFormat:@"%@:%@", kWorldLandmarksTag, kPoseWorldLandmarksStreamName],
+                   [NSString stringWithFormat:@"%@:%@", kImageTag, kImageOutStreamName]
+                ]
                   taskOptions:options
            enableFlowLimiting:options.runningMode == MPPRunningModeLiveStream
                         error:error];

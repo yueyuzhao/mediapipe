@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #import <Foundation/Foundation.h>
+
 #import "mediapipe/tasks/ios/components/containers/sources/MPPConnection.h"
 #import "mediapipe/tasks/ios/vision/core/sources/MPPImage.h"
 #import "mediapipe/tasks/ios/vision/pose_landmarker/sources/MPPPoseLandmarkerOptions.h"
@@ -112,7 +113,8 @@ NS_SWIFT_NAME(PoseLandmarker)
  */
 - (nullable MPPPoseLandmarkerResult *)detectInVideoFrame:(MPPImage *)image
                                  timestampInMilliseconds:(NSInteger)timestampInMilliseconds
-                                                   error:(NSError **)error NS_SWIFT_NAME(detect(videoFrame:timestampInMilliseconds:));
+                                                   error:(NSError **)error 
+   NS_SWIFT_NAME(detect(videoFrame:timestampInMilliseconds:));
 
 /**
  * Sends live stream image data of type `MPPImage` to perform pose landmarks detection using the
@@ -150,9 +152,10 @@ NS_SWIFT_NAME(PoseLandmarker)
  *
  * @return `YES` if the image was sent to the task successfully, otherwise `NO`.
  */
-- (BOOL)detectAsyncInImage: (MPPImage *)image
-   timestampInMilliseconds: (NSInteger)timestampInMilliseconds
-                     error: (NSError **)error NS_SWIFT_NAME(detectAsync(image:timestampInMilliseconds:));
+- (BOOL)detectAsyncInImage:(MPPImage *)image
+   timestampInMilliseconds:(NSInteger)timestampInMilliseconds
+                     error:(NSError **)error
+   NS_SWIFT_NAME(detectAsync(image:timestampInMilliseconds:));
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -23,7 +23,6 @@
     _minPoseDetectionConfidence = 0.5f;
     _minPosePresenceConfidence = 0.5f;
     _minTrackingConfidence = 0.5f;
-    _outputSegmentationMasks = NO;
   }
   return self;
 }
@@ -37,7 +36,7 @@
   poseLandmarkerOptions.minPoseDetectionConfidence = self.minPoseDetectionConfidence;
   poseLandmarkerOptions.minPosePresenceConfidence = self.minPosePresenceConfidence;
   poseLandmarkerOptions.minTrackingConfidence = self.minTrackingConfidence;
-    poseLandmarkerOptions.outputSegmentationMasks = self.outputSegmentationMasks;
+
   return poseLandmarkerOptions;
 }
 

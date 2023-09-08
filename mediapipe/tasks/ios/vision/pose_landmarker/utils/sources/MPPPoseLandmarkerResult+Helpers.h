@@ -14,7 +14,6 @@
 
 #import "mediapipe/tasks/ios/vision/pose_landmarker/sources/MPPPoseLandmarkerResult.h"
 
-#include "mediapipe/framework/formats/image.h"
 #include "mediapipe/framework/formats/landmark.pb.h"
 #include "mediapipe/framework/packet.h"
 
@@ -26,19 +25,16 @@ static const int kMicroSecondsPerMilliSecond = 1000;
 
 
 /**
- * Creates an `MPPPoseLandmarkerResult` from landmarks, world landmarks and segmentationMasks packets.
+ * Creates an `MPPPoseLandmarkerResult` from landmarks, world landmarks packets.
  *
  * @param landmarksPacket A MediaPipe packet wrapping a `std::vector<NormalizedlandmarkListProto>`.
  * @param worldLandmarksPacket A MediaPipe packet wrapping a `std::vector<LandmarkListProto>`.
- * @param segmentationMasksPacket a MediaPipe packet wrapping a `std::vector<ImageProto>`.
  *
  * @return  An `MPPPoseLandmarkerResult` object that contains the pose landmark detection
  * results.
  */
 + (MPPPoseLandmarkerResult *)poseLandmarkerResultWithLandmarksPacket:(const mediapipe::Packet &)landmarksPacket
-                                                worldLandmarksPacket:(const mediapipe::Packet &)worldLandmarksPacket
-                                             segmentationMasksPacket:(const mediapipe::Packet &)segmentationMasksPacket
-                                            shouldCopyMaskPacketData:(BOOL)shouldCopyMaskPacketData;
+                                                worldLandmarksPacket:(const mediapipe::Packet &)worldLandmarksPacket;
 
 @end
 

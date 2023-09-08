@@ -13,13 +13,13 @@
 // limitations under the License.
 
 #import "mediapipe/tasks/ios/vision/pose_landmarker/utils/sources/MPPPoseLandmarkerResult+Helpers.h"
+
 #import "mediapipe/tasks/ios/components/containers/utils/sources/MPPLandmark+Helpers.h"
 
 namespace {
-    using ImageProto = ::mediapipe::Image;
-    using LandmarkListProto = ::mediapipe::LandmarkList;
-    using NormalizedLandmarkListProto = ::mediapipe::NormalizedLandmarkList;
-    using ::mediapipe::Packet;
+using LandmarkListProto = ::mediapipe::LandmarkList;
+using NormalizedLandmarkListProto = ::mediapipe::NormalizedLandmarkList;
+using ::mediapipe::Packet;
 }  // namespace
 
 @implementation MPPPoseLandmarkerResult (Helpers)
@@ -28,14 +28,12 @@ namespace {
     (NSInteger)timestampInMilliseconds {
     return [[MPPPoseLandmarkerResult alloc] initWithLandmarks:@[]
                                                worldLandmarks:@[]
-                                            segmentationMasks:@[]
                                       timestampInMilliseconds:timestampInMilliseconds];
 }
 
-+ (MPPPoseLandmarkerResult *)poseLandmarkerResultWithLandmarksPacket:(const mediapipe::Packet &)landmarksPacket
-                                                worldLandmarksPacket:(const mediapipe::Packet &)worldLandmarksPacket
-                                             segmentationMasksPacket:(const mediapipe::Packet &)segmentationMasksPacket
-                                            shouldCopyMaskPacketData:(BOOL)shouldCopyMaskPacketData {
++ (MPPPoseLandmarkerResult *)
+    poseLandmarkerResultWithLandmarksPacket:(const mediapipe::Packet &)landmarksPacket
+                       worldLandmarksPacket:(const mediapipe::Packet &)worldLandmarksPacket {
     NSInteger timestampInMilliseconds =
         (NSInteger)(landmarksPacket.Timestamp().Value() / kMicroSecondsPerMilliSecond);
 
@@ -84,18 +82,9 @@ namespace {
         [multiPoseWorldLandmarks addObject:worldLandmarks];
     }
 
-    NSMutableArray<MPPMask *> *multiPoseSegmentationMasksProto = [[NSMutableArray alloc] init];
-    if (segmentationMasksPacket.ValidateAsType<std::vector<ImageProto> >().ok()) {
-        const std::vector<ImageProto> &segmentationMasksProto = segmentationMasksPacket.Get<std::vector<ImageProto> >();
-        for (const auto &imageProto : segmentationMasksProto) {
-            MPPMask *segmentationMasks = [[MPPMask alloc] initWithFloat32Data:(float *)imageProto.GetImageFrameSharedPtr().get()->PixelData() width:imageProto.width() height:imageProto.height() shouldCopy:shouldCopyMaskPacketData ? YES : NO];
-            [multiPoseSegmentationMasksProto addObject:segmentationMasks];
-        }
-    }
     MPPPoseLandmarkerResult *poseLandmarkerResult =
         [[MPPPoseLandmarkerResult alloc] initWithLandmarks:multiPoseLandmarks
                                             worldLandmarks:multiPoseWorldLandmarks
-                                         segmentationMasks:multiPoseSegmentationMasksProto
                                    timestampInMilliseconds:timestampInMilliseconds];
     return poseLandmarkerResult;
 }

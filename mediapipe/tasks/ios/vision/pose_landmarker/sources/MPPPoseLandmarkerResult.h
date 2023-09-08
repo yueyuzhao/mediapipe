@@ -13,9 +13,9 @@
 // limitations under the License.
 
 #import <Foundation/Foundation.h>
+
 #import "mediapipe/tasks/ios/components/containers/sources/MPPLandmark.h"
 #import "mediapipe/tasks/ios/core/sources/MPPTaskResult.h"
-#import "mediapipe/tasks/ios/vision/core/sources/MPPMask.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,15 +28,6 @@ NS_SWIFT_NAME(PoseLandmarkerResult)
 
 /** Pose landmarks in world coordniates of detected poses. */
 @property(nonatomic, readonly) NSArray<NSArray<MPPLandmark *> *> *worldLandmarks;
-
-/**
- * An optional array of `MPPMask` objects. Each `MPPMask` in the array holds a 32 bit float array of
- * size `image width` * `image height` which represents the confidence mask for each category. Each
- * element of the float array represents the confidence with which the model predicted that the
- * corresponding pixel belongs to the category that the mask represents, usually in the range [0,1].
- * Segmentation masks for pose.
- */
-@property(nonatomic, readonly, nullable) NSArray<MPPMask *> *segmentationMasks;
 
 /**
  * Initializes a new `MPPPoseLandmarkerResult` with the given landmarks, world landmarks,
@@ -53,7 +44,6 @@ NS_SWIFT_NAME(PoseLandmarkerResult)
  */
 - (instancetype)initWithLandmarks:(NSArray<NSArray<MPPNormalizedLandmark *> *> *)landmarks
                    worldLandmarks:(NSArray<NSArray<MPPLandmark *> *> *)worldLandmarks
-                segmentationMasks:(nullable NSArray<MPPMask *> *)segmentationMasks
           timestampInMilliseconds:(NSInteger)timestampInMilliseconds;
 
 @end

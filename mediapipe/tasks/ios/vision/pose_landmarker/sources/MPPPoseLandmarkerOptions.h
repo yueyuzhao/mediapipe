@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #import <Foundation/Foundation.h>
+
 #import "mediapipe/tasks/ios/core/sources/MPPTaskOptions.h"
 #import "mediapipe/tasks/ios/vision/core/sources/MPPRunningMode.h"
 #import "mediapipe/tasks/ios/vision/pose_landmarker/sources/MPPPoseLandmarkerResult.h"
@@ -95,9 +96,6 @@ NS_SWIFT_NAME(PoseLandmarkerOptions)
 
 /** The minimum confidence score for the pose tracking to be considered successful. */
 @property(nonatomic) float minTrackingConfidence;
-
-// Whether to output segmentation masks.
-@property(nonatomic) BOOL outputSegmentationMasks;
 
 @end
 

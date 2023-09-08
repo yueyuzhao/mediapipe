@@ -18,13 +18,11 @@
 
 - (instancetype)initWithLandmarks:(NSArray<NSArray<MPPNormalizedLandmark *> *> *)landmarks
                    worldLandmarks:(NSArray<NSArray<MPPLandmark *> *> *)worldLandmarks
-                segmentationMasks:(nullable NSArray<MPPMask *> *)segmentationMasks
           timestampInMilliseconds:(NSInteger)timestampInMilliseconds {
   self = [super initWithTimestampInMilliseconds:timestampInMilliseconds];
   if (self) {
     _landmarks = landmarks;
     _worldLandmarks = worldLandmarks;
-    _segmentationMasks = segmentationMasks;
   }
   return self;
 }

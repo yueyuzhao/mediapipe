@@ -67,8 +67,7 @@ static NSString *const kTaskName = @"handLandmarker";
     (PacketMap &)outputPacketMap {
   return [MPPHandLandmarkerResult
       handLandmarkerResultWithLandmarksPacket:outputPacketMap[kLandmarksOutStreamName.cppString]
-                         worldLandmarksPacket:outputPacketMap[kWorldLandmarksOutStreamName
-                                                                  .cppString]
+                         worldLandmarksPacket:outputPacketMap[kWorldLandmarksOutStreamName.cppString]
                              handednessPacket:outputPacketMap[kHandednessOutStreamName.cppString]];
 }
 
@@ -119,8 +118,7 @@ static NSString *const kTaskName = @"handLandmarker";
                  ]
                 outputStreams:@[
                   [NSString stringWithFormat:@"%@:%@", kLandmarksTag, kLandmarksOutStreamName],
-                  [NSString
-                      stringWithFormat:@"%@:%@", kWorldLandmarksTag, kWorldLandmarksOutStreamName],
+                  [NSString stringWithFormat:@"%@:%@", kWorldLandmarksTag, kWorldLandmarksOutStreamName],
                   [NSString stringWithFormat:@"%@:%@", kHandednessTag, kHandednessOutStreamName],
                   [NSString stringWithFormat:@"%@:%@", kImageTag, kImageOutStreamName]
                 ]

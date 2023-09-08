@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//mediapipe/tasks:internal"])
 
 licenses(["notice"])
 
@@ -38,9 +38,7 @@ objc_library(
     hdrs = ["sources/MPPPoseLandmarkerResult+Helpers.h"],
     deps = [
         "//mediapipe/framework:packet",
-        "//mediapipe/framework/formats:image",
         "//mediapipe/framework/formats:landmark_cc_proto",
-        "//mediapipe/tasks/ios/components/containers/utils:MPPCategoryHelpers",
         "//mediapipe/tasks/ios/components/containers/utils:MPPLandmarkHelpers",
         "//mediapipe/tasks/ios/vision/pose_landmarker:MPPPoseLandmarkerResult",
     ],
