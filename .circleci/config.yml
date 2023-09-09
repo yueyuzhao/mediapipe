@@ -20,9 +20,9 @@ jobs:
       - run: mkdir -p /tmp/artifacts
       - run: mkdir MediaPipeTasksCommon MediaPipeTasksVision MediaPipeTasksText
       # - run: bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
-      - run: FRAMEWORK_NAME=MediaPipeTasksCommon DEST_DIR=/tmp/artifacts MPP_BUILD_VERSION=0.1.5 sh mediapipe/tasks/ios/build_ios_framework.sh
-      - run: FRAMEWORK_NAME=MediaPipeTasksVision DEST_DIR=/tmp/artifacts MPP_BUILD_VERSION=0.1.5 sh mediapipe/tasks/ios/build_ios_framework.sh
-      - run: FRAMEWORK_NAME=MediaPipeTasksText DEST_DIR=/tmp/artifacts MPP_BUILD_VERSION=0.1.5 sh mediapipe/tasks/ios/build_ios_framework.sh
+      - run: FRAMEWORK_NAME=MediaPipeTasksCommon DEST_DIR=/tmp/artifacts MPP_BUILD_VERSION=0.10.5 sh mediapipe/tasks/ios/build_ios_framework.sh
+      - run: FRAMEWORK_NAME=MediaPipeTasksVision DEST_DIR=/tmp/artifacts MPP_BUILD_VERSION=0.10.5 sh mediapipe/tasks/ios/build_ios_framework.sh
+      - run: FRAMEWORK_NAME=MediaPipeTasksText DEST_DIR=/tmp/artifacts MPP_BUILD_VERSION=0.10.5 sh mediapipe/tasks/ios/build_ios_framework.sh
       - store_artifacts:
           path: /tmp/artifacts
 
